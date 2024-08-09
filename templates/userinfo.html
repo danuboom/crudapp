@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+    <h1 style="text-align: center">
+        <br/>
+        
+        {{ data[1] }}'s Detailed Information
+
+        <br/>
+        <br/>
+    </h1>
+<table style="margin: 0px auto;" style="text-align: center" border = "1" cellspacing = "15">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Age</th>
+        <th>Phone Number</th>
+        <th>Street</th>
+        <th>District</th>
+        <th>Province</th>
+        <th>Postal Code</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>{{data[0]}}</td>
+        <td>{{data[1]}}</td>
+        <td>{{data[2]}}</td>
+        <td>{{data[3]}}</td>
+        <td>{{data[4]}}</td>
+        <td>{{data[6]}}</td>
+        <td>{{data[7]}}</td>
+        <td>{{data[8]}}</td>
+        <td>{{data[9]}}</td>
+    </tr>
+
+    </tbody>
+</table>
+
+
+{% endblock %}

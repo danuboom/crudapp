@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<br/>
+    {% for mesg in get_flashed_messages() %}
+    <p style="color: red">{{ mesg }}</p>
+    {% endfor %}
+    <h1>Enter Your Information</h1>
+    <br/>
+    <form method="post">
+    <div class="msg">{{ msg }}</div>
+    <label for="first_name">First Name:</label>
+        <input id="first_name" name="first_name" value="{{request.form.get('first_name') or ''}}" class="textbox"/></br></br>
+    <label for="last_name">Last Name:</label>
+        <input id="last_name" name="last_name" value="{{request.form.get('last_name') or ''}}" class="textbox"/></br></br>
+    <label for="age">Age:</label>
+        <input id="age" name="age" value="{{request.form.get('age') or ''}}" class="textbox"/></br></br>
+    <label for="phone_number">Phone Number:</label>
+        <input id="phone_number" name="phone_number" value="{{request.form.get('phone_number') or ''}}" class="textbox"/></br></br>
+    <label for="street">Street:</label>
+        <input id="street" name="street" value="{{request.form.get('street') or ''}}" class="textbox"/></br></br>
+    <label for="district">District:</label>  
+        <input id="district" name="district" value="{{request.form.get('district') or ''}}" class="textbox"/></br></br>
+    <label for="province">Province:</label>  
+        <input id="province" name="province" value="{{request.form.get('province') or ''}}" class="textbox"/></br></br>
+    <label for="postal_code">Postal Code:</label> 
+        <input id="postal_code" name="postal_code" value="{{request.form.get('postal_code') or ''}}" class="textbox"/></br></br>
+        
+        <input type="submit" class="btn" value="SUBMIT"></br>
+      </form>
+    <br/>
+    
+
+{% endblock %}
+
+
+<!--
+    first_name = request.form['first_name']
+    last_name = request.form['last_name']
+    age = request.form['age']
+    phone_number = request.form['phone_number']
+    street = request.form['street']
+    district = request.form['district']
+    province = request.form['province']
+    postal_code = request.form['postal_code']
+
+
+<form method="POST">
+    {{ form.hidden_tag() }}
+    {{form.first_name.label}}
+    {{form.first_name()}}
+    <br/>
+    {{form.last_name.label}}
+    {{form.last_name()}}
+    <br/>
+    {{form.age.label}}
+    {{form.age()}}
+    <br/>
+    {{form.phone_number.label}}
+    {{form.phone_number()}}
+    <br/>
+    <br/>
+    <b> Address(Optianal) </b>
+    <br/>
+    <br/>
+    {{form.street.label}}
+    {{form.street()}}
+    <br/>{{form.district.label}}
+    {{form.district()}}
+    <br/>{{form.province.label}}
+    {{form.province()}}
+    <br/>{{form.postal_code.label}}
+    {{form.postal_code()}}
+    <br/>
+    {{form.submit()}}
+</form>
+-->
