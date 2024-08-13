@@ -14,28 +14,28 @@
             <div class="msg">{{ msg }}</div>
 
             <label for="first_name">First Name:</label>
-            <input id="first_name" name="first_name" value="{{request.form.get('first_name') or data[1]}}" placeholder="{{data[1]}}" class="textbox"/></br></br>
+            <input id="first_name" name="first_name" value="{{request.form.get('first_name') or data[1]}}" placeholder="{{data[1]}}" class="form-control-sm"/></br></br>
 
             <label for="last_name">Last Name:</label>
-            <input id="last_name" name="last_name" value="{{request.form.get('last_name') or data[2]}}" placeholder="{{data[2]}}" class="textbox"/></br></br>
+            <input id="last_name" name="last_name" value="{{request.form.get('last_name') or data[2]}}" placeholder="{{data[2]}}" class="form-control-sm"/></br></br>
 
             <label for="age">Age:</label>
-            <input id="age" name="age" value="{{request.form.get('age') or data[3]}}" placeholder="{{data[3]}}" class="textbox"/></br></br>
+            <input id="age" name="age" value="{{request.form.get('age') or data[3]}}" placeholder="{{data[3]}}" class="form-control-sm"/></br></br>
 
             <label for="phone_number">Phone Number:</label>
-            <input id="phone_number" name="phone_number" value="{{request.form.get('phone_number') or data[4]}}" placeholder="{{data[4]}}" class="textbox"/></br></br>
+            <input id="phone_number" name="phone_number" value="{{request.form.get('phone_number') or data[4]}}" placeholder="{{data[4]}}" class="form-control-sm"/></br></br>
 
             <label for="street">Street:</label>
-            <input id="street" name="street" value="{{request.form.get('street') or data[6]}}" placeholder="{{data[6]}}" class="textbox"/></br></br>
+            <input id="street" name="street" value="{{request.form.get('street') or data[6]}}" placeholder="{{data[6]}}" class="form-control-sm"/></br></br>
 
             <label for="district">District:</label>
-            <input id="district" name="district" value="{{request.form.get('district') or data[7]}}" placeholder="{{data[7]}}" class="textbox"/></br></br>
+            <input id="district" name="district" value="{{request.form.get('district') or data[7]}}" placeholder="{{data[7]}}" class="form-control-sm"/></br></br>
 
             <label for="province">Province:</label>
-            <input id="province" name="province" value="{{request.form.get('province') or data[8]}}" placeholder="{{data[8]}}" class="textbox"/></br></br>
+            <input id="province" name="province" value="{{request.form.get('province') or data[8]}}" placeholder="{{data[8]}}" class="form-control-sm"/></br></br>
 
             <label for="postal_code">Postal Code:</label>
-            <input id="postal_code" name="postal_code" value="{{request.form.get('postal_code') or data[9]}}" placeholder="{{data[9]}}" class="textbox"/></br></br>
+            <input id="postal_code" name="postal_code" value="{{request.form.get('postal_code') or data[9]}}" placeholder="{{data[9]}}" class="form-control-sm"/></br></br>
 
             <input type="submit" class="btn" value="SUBMIT"></br>
         </form>

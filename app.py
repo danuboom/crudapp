@@ -71,10 +71,18 @@ def info_form():
         db_cursor = connection.cursor(MySQLdb.cursors.DictCursor)
         db_cursor.execute("INSERT INTO person (first_name, last_name, age, phone_number) VALUES (%s, %s, %s, %s)",
                 (first_name, last_name, age, phone_number,))
+        
         person_id = db_cursor.lastrowid
 
         db_cursor.execute("INSERT INTO address (person_id, street, district, province, postal_code) VALUES (%s, %s, %s, %s, %s)",
-                    (person_id, street, district, province, postal_code,))
+            (person_id, street, district, province, postal_code,))
+        db_cursor.execute("""UPDATE person
+            SET first_name = CONCAT(UCASE(SUBSTRING(first_name, 1, 1)), LOWER(SUBSTRING(first_name, 2)));""")
+        db_cursor.execute("""UPDATE person
+            SET last_name = CONCAT(UCASE(SUBSTRING(last_name, 1, 1)), LOWER(SUBSTRING(last_name, 2)));""")
+                
+        
+        
         connection.commit()
 
         flash('success')

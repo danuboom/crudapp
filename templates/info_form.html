@@ -4,29 +4,29 @@
 {% block content %}
 <br/>
     {% for mesg in get_flashed_messages() %}
-    <p style="color: red">{{ mesg }}</p>
+    <div class="alert alert-danger">{{ mesg }}</div>
     {% endfor %}
     <h1>Enter Your Information</h1>
     <br/>
     <form method="post">
-    <div class="msg">{{ msg }}</div>
-    <label for="first_name">First Name:</label>
-        <input id="first_name" name="first_name" value="{{request.form.get('first_name') or ''}}" class="textbox"/></br></br>
-    <label for="last_name">Last Name:</label>
-        <input id="last_name" name="last_name" value="{{request.form.get('last_name') or ''}}" class="textbox"/></br></br>
-    <label for="age">Age:</label>
-        <input id="age" name="age" value="{{request.form.get('age') or ''}}" class="textbox"/></br></br>
-    <label for="phone_number">Phone Number:</label>
-        <input id="phone_number" name="phone_number" value="{{request.form.get('phone_number') or ''}}" class="textbox"/></br></br>
-    <label for="street">Street:</label>
-        <input id="street" name="street" value="{{request.form.get('street') or ''}}" class="textbox"/></br></br>
-    <label for="district">District:</label>  
-        <input id="district" name="district" value="{{request.form.get('district') or ''}}" class="textbox"/></br></br>
-    <label for="province">Province:</label>  
-        <input id="province" name="province" value="{{request.form.get('province') or ''}}" class="textbox"/></br></br>
-    <label for="postal_code">Postal Code:</label> 
-        <input id="postal_code" name="postal_code" value="{{request.form.get('postal_code') or ''}}" class="textbox"/></br></br>
-        
+    
+        <label for="first_name">First Name:</label>
+            <input id="first_name" name="first_name" value="{{request.form.get('first_name') or ''}}" class="form-control-sm"/></br></br>
+        <label for="last_name">Last Name:</label>
+            <input id="last_name" name="last_name" value="{{request.form.get('last_name') or ''}}" class="form-control-sm"/></br></br>
+        <label for="age">Age:</label>
+            <input id="age" name="age" value="{{request.form.get('age') or ''}}" class="form-control-sm"/></br></br>
+        <label for="phone_number">Phone Number:</label>
+            <input id="phone_number" name="phone_number" value="{{request.form.get('phone_number') or ''}}" class="form-control-sm"/></br></br>
+        <label for="street">Street:</label>
+            <input id="street" name="street" value="{{request.form.get('street') or ''}}" class="form-control-sm"/></br></br>
+        <label for="district">District:</label>  
+            <input id="district" name="district" value="{{request.form.get('district') or ''}}" class="form-control-sm"/></br></br>
+        <label for="province">Province:</label>  
+            <input id="province" name="province" value="{{request.form.get('province') or ''}}" class="form-control-sm"/></br></br>
+        <label for="postal_code">Postal Code:</label> 
+            <input id="postal_code" name="postal_code" value="{{request.form.get('postal_code') or ''}}" class="form-control-sm"/></br></br>
+            
         <input type="submit" class="btn" value="SUBMIT"></br>
       </form>
     <br/>

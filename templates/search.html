@@ -10,23 +10,23 @@
     <form method="post">
     <div class="msg">{{ msg }}</div>
     <label for="user_id">User ID:</label>
-        <input id="user_id" value="{{request.form.get('user_id') or ''}}" name="user_id" class="textbox"/></br></br>
+        <input id="user_id" value="{{request.form.get('user_id') or ''}}" name="user_id" class="form-control-sm"/></br></br>
     <label for="first_name">First Name:</label>
-        <input id="first_name" value="{{request.form.get('first_name') or ''}}" name="first_name" class="textbox"/></br></br>
+        <input id="first_name" value="{{request.form.get('first_name') or ''}}" name="first_name" class="form-control-sm"/></br></br>
     <label for="last_name">Last Name:</label>
-        <input id="last_name"  value="{{request.form.get('last_name') or ''}}" name="last_name" class="textbox"/></br></br>
+        <input id="last_name"  value="{{request.form.get('last_name') or ''}}" name="last_name" class="form-control-sm"/></br></br>
     <label for="age">Age:</label>
-        <input id="age" value="{{request.form.get('age') or ''}}" name="age" class="textbox"/></br></br>
+        <input id="age" value="{{request.form.get('age') or ''}}" name="age" class="form-control-sm"/></br></br>
     <label for="phone_number">Phone Number:</label>
-        <input id="phone_number" value="{{request.form.get('phone_number') or ''}}" name="phone_number" class="textbox"/></br></br>
+        <input id="phone_number" value="{{request.form.get('phone_number') or ''}}" name="phone_number" class="form-control-sm"/></br></br>
     <label for="street">Street:</label>
-        <input id="street" value="{{request.form.get('street') or ''}}" name="street" class="textbox"/></br></br>
+        <input id="street" value="{{request.form.get('street') or ''}}" name="street" class="form-control-sm"/></br></br>
     <label for="district">District:</label>  
-        <input id="district" value="{{request.form.get('district') or ''}}" name="district" class="textbox"/></br></br>
+        <input id="district" value="{{request.form.get('district') or ''}}" name="district" class="form-control-sm"/></br></br>
     <label for="province">Province:</label>  
-        <input id="province" value="{{request.form.get('province') or ''}}" name="province" class="textbox"/></br></br>
+        <input id="province" value="{{request.form.get('province') or ''}}" name="province" class="form-control-sm"/></br></br>
     <label for="postal_code">Postal Code:</label> 
-        <input id="postal_code" value="{{request.form.get('postal_code') or ''}}" name="postal_code" class="textbox"/></br></br>
+        <input id="postal_code" value="{{request.form.get('postal_code') or ''}}" name="postal_code" class="form-control-sm"/></br></br>
         
         <input type="submit" class="btn" value="SUBMIT"></br>
       </form>
