@@ -1,10 +1,12 @@
 from flask import Flask, render_template,url_for, request, flash,redirect
 import mysql.connector
 import MySQLdb.cursors
+from config import SECRET_KEY
+
 
 app = Flask(__name__)
 
-app.config['SECRET_KEY'] = 'YVHi2tUOIzNUYsq6klltzA'
+app.config['SECRET_KEY'] = SECRET_KEY
 
 connection = mysql.connector.connect(
     host="localhost",
