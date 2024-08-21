@@ -1,13 +1,18 @@
 from flask import Flask, render_template,url_for, request, flash,redirect
+#import various components from the Flask framework
 import mysql.connector
+#import libary for interacting with MySQL database
 import MySQLdb.cursors
+#import module for executing SQL statements
 from config import SECRET_KEY
 
 
+#initialize Flask web application __name__ for reference this python file name
 app = Flask(__name__)
 
 app.config['SECRET_KEY'] = SECRET_KEY
 
+#establish a connection to MySQL database
 connection = mysql.connector.connect(
     host="localhost",
     port="3306",
@@ -17,11 +22,13 @@ connection = mysql.connector.connect(
     auth_plugin='mysql_native_password'
 )
 
+#create a cursor object to execute SQL query
 db_cursor = connection.cursor(dictionary=True)
 
+#define a route for the root URL
 @app.route("/", methods=['GET', 'POST'])
 def index():
-    records = []
+    records = [] #initialize an empty list to store the retrieved data
     try:
         db_cursor = connection.cursor(MySQLdb.cursors.DictCursor)
         db_cursor.execute("select * from person left join address on person.person_id = address.person_id")
@@ -30,13 +37,14 @@ def index():
     except mysql.connector.Error as err:
         print(f"Error: {err}")
 
+    #return HTML page and pass the records to template
     return render_template('index.html',data=records)
 
 @app.route("/info_form", methods=['GET','POST'])
 def info_form():
-    error_messages = []
+    error_messages = [] #for store error messages
     if request.method == 'POST':
-        print("test")
+        print("test") #for debugging
         first_name = request.form['first_name']
         last_name = request.form['last_name']
         age = request.form['age']
@@ -46,6 +54,7 @@ def info_form():
         province = request.form['province']
         postal_code = request.form['postal_code']
         
+        #basic error handling
         if not first_name:
             error_messages.append("First name is required")
         
@@ -70,11 +79,12 @@ def info_form():
             flash(error_messages)
             return render_template('info_form.html', errors=error_messages)
 
+        #database connection
         db_cursor = connection.cursor(MySQLdb.cursors.DictCursor)
         db_cursor.execute("INSERT INTO person (first_name, last_name, age, phone_number) VALUES (%s, %s, %s, %s)",
                 (first_name, last_name, age, phone_number,))
         
-        person_id = db_cursor.lastrowid
+        person_id = db_cursor.lastrowid #to provide person_id to address table
 
         db_cursor.execute("INSERT INTO address (person_id, street, district, province, postal_code) VALUES (%s, %s, %s, %s, %s)",
             (person_id, street, district, province, postal_code,))
@@ -83,15 +93,14 @@ def info_form():
         db_cursor.execute("""UPDATE person
             SET last_name = CONCAT(UCASE(SUBSTRING(last_name, 1, 1)), LOWER(SUBSTRING(last_name, 2)));""")
                 
-        
-        
-        connection.commit()
+        connection.commit() #commit the SQL query to the database
 
-        flash('success')
+        flash('success') #pass messege to the page 
         return redirect(url_for('index'))
 
     return render_template('info_form.html',)
 
+#error handlers
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template('404.html'), 404
@@ -100,7 +109,7 @@ def page_not_found(e):
 def page_not_found(e):
     return render_template('500.html'), 500
 
-
+#query specific user id 
 @app.route("/userinfo/<user_id>")
 def userinfo(user_id):
     db_cursor = connection.cursor(MySQLdb.cursors.DictCursor)
@@ -147,7 +156,7 @@ def edit(user_id):
                 error_messages.append("Postal code must be a number")
             
         if error_messages:
-            error_messages = ' , '.join(error_messages)
+            error_messages = ' , '.join(error_messages) #for concatenate multiple error messages
             flash(error_messages)
             return render_template('edit.html',data=data, errors=error_messages)
         
@@ -173,6 +182,7 @@ def delete(user_id):
     flash('Successfully deleted')
 
     return redirect(url_for('index'))
+
 
 @app.route("/search", methods=['GET','POST'])
 def search():
@@ -241,8 +251,6 @@ def search():
         return render_template('search_result.html',data = data)
 
     return render_template('search.html')
-
-
 
 if __name__ == '__main__':
     app.run(debug=True)
