@@ -1,7 +1,10 @@
 {% extends 'base.html' %}
 {% block content %}
+<!-- flask has built in jinja2 template engin
+ all of the code inside {} is jinja2 syntax-->
+ 
     <br/>
-    {% for mesg in get_flashed_messages() %}
+    {% for mesg in get_flashed_messages() %} 
     <div class="alert alert-danger">{{ mesg }}</div>
     {% endfor %}
     <h1 style="text-align: center">User Information</h1>
@@ -49,6 +52,5 @@
         </tbody>
     </table>
     </div>
-
 
 {% endblock %}

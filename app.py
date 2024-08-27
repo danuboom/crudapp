@@ -4,8 +4,7 @@ import mysql.connector
 #import libary for interacting with MySQL database
 import MySQLdb.cursors
 #import module for executing SQL statements
-from config import SECRET_KEY
-
+from config import SECRET_KEY #for session managing
 
 #initialize Flask web application __name__ for reference this python file name
 app = Flask(__name__)
@@ -30,7 +29,8 @@ db_cursor = connection.cursor(dictionary=True)
 def index():
     records = [] #initialize an empty list to store the retrieved data
     try:
-        db_cursor = connection.cursor(MySQLdb.cursors.DictCursor)
+        db_cursor = connection.cursor(MySQLdb.cursors.DictCursor) 
+        #MySQL connector library use a object dictionary cursor for manage database
         db_cursor.execute("select * from person left join address on person.person_id = address.person_id")
         records=db_cursor.fetchall()
 
@@ -45,6 +45,11 @@ def info_form():
     error_messages = [] #for store error messages
     if request.method == 'POST':
         print("test") #for debugging
+        
+        # request.form will request an item from inside [''] 
+        # which it will retreive from a input field in html page that have matching name
+        # and store in a variable that will to insert to the database
+        
         first_name = request.form['first_name']
         last_name = request.form['last_name']
         age = request.form['age']
@@ -74,8 +79,9 @@ def info_form():
             except ValueError:
                 error_messages.append("Postal code must be a number")
         
-        if error_messages:
-            error_messages = ' , '.join(error_messages)
+        if error_messages: 
+            # this if statement for passing an error message with multiple error messages supported
+            error_messages = ' , '.join(error_messages) 
             flash(error_messages)
             return render_template('info_form.html', errors=error_messages)
 
@@ -84,7 +90,8 @@ def info_form():
         db_cursor.execute("INSERT INTO person (first_name, last_name, age, phone_number) VALUES (%s, %s, %s, %s)",
                 (first_name, last_name, age, phone_number,))
         
-        person_id = db_cursor.lastrowid #to provide person_id to address table
+        person_id = db_cursor.lastrowid 
+        #to provide person_id to address table to match the person_id that database auto generated
 
         db_cursor.execute("INSERT INTO address (person_id, street, district, province, postal_code) VALUES (%s, %s, %s, %s, %s)",
             (person_id, street, district, province, postal_code,))
@@ -95,7 +102,7 @@ def info_form():
                 
         connection.commit() #commit the SQL query to the database
 
-        flash('success') #pass messege to the page 
+        flash('success') #pass message to the page 
         return redirect(url_for('index'))
 
     return render_template('info_form.html',)
@@ -107,11 +114,10 @@ def page_not_found(e):
 
 @app.errorhandler(500)
 def page_not_found(e):
-    return render_template('500.html'), 500
-
-#query specific user id 
-@app.route("/userinfo/<user_id>")
-def userinfo(user_id):
+    return render_template('500.html'),
+#query specific user id
+@app.route("/userinfo/<user_id>") #<user_id> will be capture from the URL
+def userinfo(user_id):#user_id is passed from the URL above 
     db_cursor = connection.cursor(MySQLdb.cursors.DictCursor)
     query = " select * from person left join address on person.person_id = address.person_id where person.person_id = %s"
     db_cursor.execute(query, (user_id,))
